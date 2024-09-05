@@ -30,10 +30,12 @@ def find_src_files() -> list:
             path = root.replace(src_dir, "") + "\\"
             for file in files:
                 file_path = path + file
-                print(f"{txt_clr.green_bg} FOUND {txt_clr.reset_clr} {file_path}")
+                print(f"{txt_clr.white_bg} FOUND {txt_clr.reset_clr} {file_path}")
                 file_paths.append(file_path)
         except IndexError:
             pass   
+    print(f"\nFound {len(file_paths)} files.")
+    
     
     return file_paths
 
@@ -117,7 +119,7 @@ def save_file_paths(file_paths: list, file_name: str):
         except:
             print(f"{txt_clr.red_bg} FAILED {txt_clr.reset_clr}")
 
-    print(f"\nSaved {count} file-paths to {file_name}.\n")
+    print(f'\nSaved {count}/{len(file_paths)} file-paths to "{file_name}".\n')
 
     output.close()
 
@@ -134,7 +136,7 @@ def import_txt_file() -> list:
     # Print discovered .txt files
     txt_files: list = []
     count: int = 0
-    print("Select a file for import:")
+    print("Select a file to import:")
     for file in root_files:
         # Only print .txt files
         if file[-3:] != 'txt':
@@ -212,7 +214,7 @@ def main():
             file_paths = import_txt_file()
 
             # Check if function has returned early
-            if file_name is None:
+            if file_paths is None:
                 continue
 
             discovered_files = check_dst_files(file_paths)
