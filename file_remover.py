@@ -36,7 +36,6 @@ def find_src_files() -> list:
             pass   
     print(f"\nFound {len(file_paths)} files.")
     
-    
     return file_paths
 
 
@@ -196,12 +195,15 @@ def main():
             # discover files in source directory
             file_paths = find_src_files()
 
-            # Prompt user for text file's name
-            file_name = input("\nName of output file: ") + '.txt'
-            # Reset if no name was entered
-            if file_name == ".txt":
+            # Reset if no files were found
+            if file_paths == []:
+                print()
+                os.system("pause")
                 os.system("cls")
                 continue
+
+            # Prompt user for text file's name
+            file_name = input("\nName of output file: ") + '.txt'
 
             # Save discovered file-paths to text
             save_file_paths(file_paths, file_name)
@@ -233,6 +235,13 @@ def main():
 
             # Discover files in source directory
             file_paths = find_src_files()
+
+            # Reset if no files were found
+            if file_paths == []:
+                print()
+                os.system("pause")
+                os.system("cls")
+                continue
 
             print()
 
